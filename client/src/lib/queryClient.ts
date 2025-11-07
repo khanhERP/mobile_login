@@ -12,9 +12,29 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
+  // Get domain from currentUser in sessionStorage first
+  let domain = window.location.origin;
+  try {
+    const currentUserStr = sessionStorage.getItem("currentUser");
+    if (currentUserStr) {
+      const currentUser = JSON.parse(currentUserStr);
+      domain = currentUser.domain || domain;
+    }
+  } catch (error) {
+    console.error("Error parsing currentUser:", error);
+  }
+  
+  // Fallback to localStorage if needed
+  domain = localStorage.getItem("domain") || domain;
+  
+  const headers: HeadersInit = {
+    ...(data ? { "Content-Type": "application/json" } : {}),
+    "Origin": domain,
+  };
+
   const res = await fetch(url, {
     method,
-    headers: data ? { "Content-Type": "application/json" } : {},
+    headers,
     body: data
       ? JSON.stringify(data, (key, value) => {
           if (value instanceof Date) {
@@ -35,8 +55,26 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
+    // Get domain from currentUser in sessionStorage first
+    let domain = window.location.origin;
+    try {
+      const currentUserStr = sessionStorage.getItem("currentUser");
+      if (currentUserStr) {
+        const currentUser = JSON.parse(currentUserStr);
+        domain = currentUser.domain || domain;
+      }
+    } catch (error) {
+      console.error("Error parsing currentUser:", error);
+    }
+    
+    // Fallback to localStorage if needed
+    domain = localStorage.getItem("domain") || domain;
+    
     const res = await fetch(queryKey.join("/") as string, {
       credentials: "include",
+      headers: {
+        "Origin": domain,
+      },
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
