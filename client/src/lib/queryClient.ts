@@ -64,12 +64,29 @@ export const getQueryFn: <T>(options: {
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      queryFn: getQueryFn({ on401: "returnNull" }),
+      queryFn: async ({ queryKey }) => {
+        // Always get domain from localStorage and send as header
+        const domain = localStorage.getItem("domain") || "";
+
+        const response = await fetch(`${API_URL}/${queryKey[0]}`, {
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Tenant-Domain": domain, // Send domain on every request
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+
+        return response.json();
+      },
+      staleTime: 1000 * 60 * 5,
+      retry: 1,
       refetchInterval: false,
       refetchOnWindowFocus: false,
-      staleTime: 2 * 60 * 1000, // Cache 2 phút
       gcTime: 10 * 60 * 1000, // Giữ cache 10 phút
-      retry: 1,
       refetchOnMount: false,
       refetchOnReconnect: true,
       networkMode: "online",
