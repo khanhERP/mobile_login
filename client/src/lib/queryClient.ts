@@ -14,7 +14,7 @@ export async function apiRequest(
 ): Promise<Response> {
   // Get domain from localStorage
   const domain = localStorage.getItem("domain") || window.location.origin;
-
+  console.log("domain apiRequest", domain);
   const headers: HeadersInit = {
     ...(data ? { "Content-Type": "application/json" } : {}),
     "X-Tenant-Domain": domain, // Send domain as custom header
@@ -45,7 +45,7 @@ export const getQueryFn: <T>(options: {
   async ({ queryKey }) => {
     // Get domain from localStorage
     const domain = localStorage.getItem("domain") || window.location.origin;
-
+    console.log("domain getQueryFn", domain);
     const res = await fetch(queryKey.join("/") as string, {
       credentials: "include",
       headers: {
