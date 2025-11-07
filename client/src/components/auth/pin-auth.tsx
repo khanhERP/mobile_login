@@ -67,6 +67,7 @@ export function PinAuth({ onAuthSuccess }: PinAuthProps) {
         // Lưu trạng thái đăng nhập vào sessionStorage
         sessionStorage.setItem("pinAuthenticated", "true");
         sessionStorage.setItem("currentUser", JSON.stringify(data.user)); // Assuming user data is returned
+        localStorage.setItem("domain", data.user.domain);
 
         console.log("✅ Login successful");
         onAuthSuccess();

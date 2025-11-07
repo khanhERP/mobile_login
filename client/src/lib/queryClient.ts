@@ -1,4 +1,5 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
+import { defaultFetcher } from './utils';
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -88,13 +89,14 @@ export const getQueryFn: <T>(options: {
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      queryFn: getQueryFn({ on401: "throw" }),
+      queryFn: defaultFetcher, // 👈 set mặc định ở đây
+      // queryFn: getQueryFn({ on401: "throw" }),
       refetchInterval: false,
-      refetchOnWindowFocus: false,
-      staleTime: 2 * 60 * 1000, // Cache 2 phút
-      gcTime: 10 * 60 * 1000, // Giữ cache 10 phút
+      refetchOnWindowFocus: true,
+      staleTime: 0, // No cache
+      gcTime: 0, // Don't keep in memory
       retry: 1,
-      refetchOnMount: false,
+      refetchOnMount: true,
       refetchOnReconnect: true,
       networkMode: "online",
     },
