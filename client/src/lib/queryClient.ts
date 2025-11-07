@@ -1,5 +1,4 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
-import { defaultFetcher } from './utils';
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -13,24 +12,12 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  // Get domain from currentUser in sessionStorage first
-  let domain = window.location.origin;
-  try {
-    const currentUserStr = sessionStorage.getItem("currentUser");
-    if (currentUserStr) {
-      const currentUser = JSON.parse(currentUserStr);
-      domain = currentUser.domain || domain;
-    }
-  } catch (error) {
-    console.error("Error parsing currentUser:", error);
-  }
-  
-  // Fallback to localStorage if needed
-  domain = localStorage.getItem("domain") || domain;
-  
+  // Get domain from localStorage
+  const domain = localStorage.getItem("domain") || window.location.origin;
+
   const headers: HeadersInit = {
     ...(data ? { "Content-Type": "application/json" } : {}),
-    "Origin": domain,
+    "X-Tenant-Domain": domain, // Send domain as custom header
   };
 
   const res = await fetch(url, {
@@ -56,25 +43,13 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    // Get domain from currentUser in sessionStorage first
-    let domain = window.location.origin;
-    try {
-      const currentUserStr = sessionStorage.getItem("currentUser");
-      if (currentUserStr) {
-        const currentUser = JSON.parse(currentUserStr);
-        domain = currentUser.domain || domain;
-      }
-    } catch (error) {
-      console.error("Error parsing currentUser:", error);
-    }
-    
-    // Fallback to localStorage if needed
-    domain = localStorage.getItem("domain") || domain;
-    
+    // Get domain from localStorage
+    const domain = localStorage.getItem("domain") || window.location.origin;
+
     const res = await fetch(queryKey.join("/") as string, {
       credentials: "include",
       headers: {
-        "Origin": domain,
+        "X-Tenant-Domain": domain, // Send domain as custom header
       },
     });
 
@@ -89,14 +64,13 @@ export const getQueryFn: <T>(options: {
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      queryFn: defaultFetcher, // 👈 set mặc định ở đây
-      // queryFn: getQueryFn({ on401: "throw" }),
+      queryFn: getQueryFn({ on401: "returnNull" }),
       refetchInterval: false,
-      refetchOnWindowFocus: true,
-      staleTime: 0, // No cache
-      gcTime: 0, // Don't keep in memory
+      refetchOnWindowFocus: false,
+      staleTime: 2 * 60 * 1000, // Cache 2 phút
+      gcTime: 10 * 60 * 1000, // Giữ cache 10 phút
       retry: 1,
-      refetchOnMount: true,
+      refetchOnMount: false,
       refetchOnReconnect: true,
       networkMode: "online",
     },
