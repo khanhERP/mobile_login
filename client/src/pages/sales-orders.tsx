@@ -109,17 +109,17 @@ export default function SalesOrdersPage({ onLogout }: SalesOrdersPageProps) {
     isLoading: ordersLoading,
     refetch: refetchOrders,
   } = useQuery({
-    queryKey: ["/api/orders/date-range", startDate, endDate],
+    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders/date-range", startDate, endDate],
     queryFn: async () => {
       try {
         console.log(`Dashboard - Date Range Query:`, {
           startDate: dateRange.start,
           endDate: dateRange.end,
-          apiUrl: `/api/orders/date-range/${startDate}/${endDate}`,
+          apiUrl: `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders/date-range/${startDate}/${endDate}`,
         });
 
         const response = await fetch(
-          `/api/orders/date-range/${startDate}/${endDate}`,
+          `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders/date-range/${startDate}/${endDate}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -153,7 +153,7 @@ export default function SalesOrdersPage({ onLogout }: SalesOrdersPageProps) {
   const { data: orderItems = [] } = useQuery({
     queryKey: ["order-items"],
     queryFn: async () => {
-      const response = await fetch("/api/order-items");
+      const response = await fetch("https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/order-items");
       if (!response.ok) {
         throw new Error("Failed to fetch order items");
       }
@@ -165,7 +165,7 @@ export default function SalesOrdersPage({ onLogout }: SalesOrdersPageProps) {
   const { data: tables = [] } = useQuery({
     queryKey: ["tables"],
     queryFn: async () => {
-      const response = await fetch("/api/tables");
+      const response = await fetch("https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/tables");
       if (!response.ok) {
         throw new Error("Failed to fetch tables");
       }
@@ -177,7 +177,7 @@ export default function SalesOrdersPage({ onLogout }: SalesOrdersPageProps) {
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const response = await fetch("/api/products");
+      const response = await fetch("https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/products");
       if (!response.ok) {
         throw new Error("Failed to fetch products");
       }
@@ -189,7 +189,7 @@ export default function SalesOrdersPage({ onLogout }: SalesOrdersPageProps) {
   const { data: storeSettings } = useQuery({
     queryKey: ["store-settings"],
     queryFn: async () => {
-      const response = await fetch("/api/store-settings");
+      const response = await fetch("https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/store-settings");
       if (!response.ok) {
         throw new Error("Failed to fetch store settings");
       }
@@ -396,7 +396,7 @@ export default function SalesOrdersPage({ onLogout }: SalesOrdersPageProps) {
       orderId: number;
       status: string;
     }) => {
-      const response = await fetch(`/api/orders/${orderId}/status`, {
+      const response = await fetch(`https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders/${orderId}/status`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
