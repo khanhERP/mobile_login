@@ -33,12 +33,25 @@ export const setupRequestInterceptor = () => {
     const startTime = performance.now();
     
     // Parse request info
-    const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+    let url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
     const method = init?.method || 'GET';
     
     // Get domain from localStorage
     const domain = localStorage.getItem('domain') || 'NOT_SET';
     const currentOrigin = window.location.origin;
+    
+    // Fix CORS issue: Convert Replit dev URLs to relative URLs in production
+    if (url.includes('replit.dev') && !currentOrigin.includes('replit.dev')) {
+      // Extract the path from the full URL
+      const urlObj = new URL(url);
+      url = urlObj.pathname + urlObj.search + urlObj.hash;
+      console.log(`🔄 Converted Replit dev URL to relative: ${url}`);
+      
+      // Update input to use relative URL
+      if (typeof input === 'string') {
+        input = url;
+      }
+    }
     
     // Clone init to avoid mutating the original
     const enhancedInit = { ...init };
