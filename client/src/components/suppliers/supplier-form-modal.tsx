@@ -72,11 +72,11 @@ export function SupplierFormModal({ isOpen, onClose, supplier }: SupplierFormMod
 
   const createMutation = useMutation({
     mutationFn: async (data: InsertSupplier) => {
-      const response = await apiRequest('POST', 'https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/suppliers', data);
+      const response = await apiRequest('POST', 'https://mobile-login-be.onrender.com/api/suppliers', data);
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/suppliers'] });
+      queryClient.invalidateQueries({ queryKey: ['https://mobile-login-be.onrender.com/api/suppliers'] });
       toast({
         title: t("common.successTitle"),
         description: t("suppliers.createSuccess"),
@@ -94,11 +94,11 @@ export function SupplierFormModal({ isOpen, onClose, supplier }: SupplierFormMod
 
   const updateMutation = useMutation({
     mutationFn: async (data: Partial<InsertSupplier>) => {
-      const response = await apiRequest('PUT', `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/suppliers/${supplier!.id}`, data);
+      const response = await apiRequest('PUT', `https://mobile-login-be.onrender.com/api/suppliers/${supplier!.id}`, data);
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/suppliers'] });
+      queryClient.invalidateQueries({ queryKey: ['https://mobile-login-be.onrender.com/api/suppliers'] });
       toast({
         title: t("common.successTitle"),
         description: t("suppliers.updateSuccess"),

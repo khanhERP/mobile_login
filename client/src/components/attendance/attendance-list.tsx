@@ -30,15 +30,15 @@ export function AttendanceList({
 }: AttendanceListProps) {
   const { t } = useTranslation();
   const { data: employees } = useQuery({
-    queryKey: ['https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/employees'],
+    queryKey: ['https://mobile-login-be.onrender.com/api/employees'],
   });
 
   const { data: attendanceRecords, isLoading } = useQuery({
     queryKey: useRange 
-      ? ['https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance', 'range', dateRange?.startDate, dateRange?.endDate]
-      : ['https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance', selectedDate],
+      ? ['https://mobile-login-be.onrender.com/api/attendance', 'range', dateRange?.startDate, dateRange?.endDate]
+      : ['https://mobile-login-be.onrender.com/api/attendance', selectedDate],
     queryFn: async () => {
-      let url = 'https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance';
+      let url = 'https://mobile-login-be.onrender.com/api/attendance';
       if (useRange && dateRange?.startDate && dateRange?.endDate) {
         url += `?startDate=${dateRange.startDate}&endDate=${dateRange.endDate}`;
       } else {

@@ -94,7 +94,7 @@ export function TableManagement() {
   const [previewReceipt, setPreviewReceipt] = useState<any>(null);
 
   const { data: tables, isLoading } = useQuery({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/tables"],
+    queryKey: ["https://mobile-login-be.onrender.com/api/tables"],
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     gcTime: 10 * 60 * 1000, // Keep in cache for 10 minutes
     refetchOnWindowFocus: false,
@@ -117,9 +117,9 @@ export function TableManagement() {
 
   const createTableMutation = useMutation({
     mutationFn: (data: TableFormData) =>
-      apiRequest("POST", "https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/tables", data),
+      apiRequest("POST", "https://mobile-login-be.onrender.com/api/tables", data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/tables"] });
+      queryClient.invalidateQueries({ queryKey: ["https://mobile-login-be.onrender.com/api/tables"] });
       toast({
         title: t("common.success"),
         description: t("tables.tableCreateSuccess"),
@@ -137,9 +137,9 @@ export function TableManagement() {
 
   const updateTableMutation = useMutation({
     mutationFn: ({ id, data }: { id: number; data: TableFormData }) =>
-      apiRequest("PUT", `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/tables/${id}`, data),
+      apiRequest("PUT", `https://mobile-login-be.onrender.com/api/tables/${id}`, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/tables"] });
+      queryClient.invalidateQueries({ queryKey: ["https://mobile-login-be.onrender.com/api/tables"] });
       toast({
         title: t("common.success"),
         description: t("tables.tableUpdateSuccess"),
@@ -156,9 +156,9 @@ export function TableManagement() {
   });
 
   const deleteTableMutation = useMutation({
-    mutationFn: (id: number) => apiRequest("DELETE", `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/tables/${id}`, {}),
+    mutationFn: (id: number) => apiRequest("DELETE", `https://mobile-login-be.onrender.com/api/tables/${id}`, {}),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/tables"] });
+      queryClient.invalidateQueries({ queryKey: ["https://mobile-login-be.onrender.com/api/tables"] });
       toast({
         title: t("common.success"),
         description: t("tables.tableDeleteSuccess"),
