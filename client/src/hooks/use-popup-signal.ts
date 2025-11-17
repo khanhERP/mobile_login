@@ -8,7 +8,7 @@ export function usePopupSignal() {
     // Connect WebSocket to same port as main application with /ws path
     const isSecure = window.location.protocol === 'https:';
     const wsProtocol = isSecure ? 'wss:' : 'ws:';
-    const wsUrl = `https://mobile-login-be.onrender.com/ws`;
+    const wsUrl = `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/ws`;
 
     console.log('Connecting to WebSocket:', wsUrl);
 
@@ -63,7 +63,7 @@ export function usePopupSignal() {
   }, []);
 
   const sendPopupClose = (success: boolean) => {
-    fetch('https://mobile-login-be.onrender.com/api/popup/close', {
+    fetch('https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/popup/close', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

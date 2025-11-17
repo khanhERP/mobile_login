@@ -45,7 +45,7 @@ export default function POS({ onLogout }: POSPageProps) {
     const connectWebSocket = () => {
       try {
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        const wsUrl = `https://mobile-login-be.onrender.com/ws`;
+        const wsUrl = `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/ws`;
         ws = new WebSocket(wsUrl);
 
         ws.onopen = () => {
@@ -71,9 +71,9 @@ export default function POS({ onLogout }: POSPageProps) {
 
               // Clear cache and force refresh
               queryClient.clear();
-              queryClient.invalidateQueries({ queryKey: ["https://mobile-login-be.onrender.com/api/products"] });
-              queryClient.invalidateQueries({ queryKey: ["https://mobile-login-be.onrender.com/api/categories"] });
-              queryClient.invalidateQueries({ queryKey: ["https://mobile-login-be.onrender.com/api/store-settings"] });
+              queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/products"] });
+              queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/categories"] });
+              queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/store-settings"] });
 
               // Dispatch custom events for components
               window.dispatchEvent(new CustomEvent('forceDataRefresh', {
@@ -109,9 +109,9 @@ export default function POS({ onLogout }: POSPageProps) {
 
       // Force data refresh for any e-invoice related events
       queryClient.clear();
-      queryClient.invalidateQueries({ queryKey: ["https://mobile-login-be.onrender.com/api/products"] });
-      queryClient.invalidateQueries({ queryKey: ["https://mobile-login-be.onrender.com/api/categories"] });
-      queryClient.invalidateQueries({ queryKey: ["https://mobile-login-be.onrender.com/api/store-settings"] });
+      queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/products"] });
+      queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/categories"] });
+      queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/store-settings"] });
 
       // Dispatch refresh event for components
       window.dispatchEvent(new CustomEvent('forceDataRefresh', {
@@ -311,7 +311,7 @@ export default function POS({ onLogout }: POSPageProps) {
             // Send popup close signal via WebSocket to trigger other components to refresh
             try {
               const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-              const wsUrl = `https://mobile-login-be.onrender.com/ws`;
+              const wsUrl = `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/ws`;
               const ws = new WebSocket(wsUrl);
 
               ws.onopen = () => {

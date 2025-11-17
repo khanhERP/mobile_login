@@ -39,9 +39,9 @@ export function RightSidebar() {
 
   // Query store settings to get business type
   const { data: storeSettings } = useQuery({
-    queryKey: ["https://mobile-login-be.onrender.com/api/store-settings"],
+    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/store-settings"],
     queryFn: async () => {
-      const response = await apiRequest("GET", "https://mobile-login-be.onrender.com/api/store-settings");
+      const response = await apiRequest("GET", "https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/store-settings");
       return response.json();
     },
   });

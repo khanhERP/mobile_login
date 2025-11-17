@@ -53,7 +53,7 @@ export function PinAuth({ onAuthSuccess }: PinAuthProps) {
       console.log("🔐 Logging in via API...");
 
       // Call API to verify PIN - Changed to login API
-      const response = await fetch("https://mobile-login-be.onrender.com/api/auth/login", {
+      const response = await fetch("https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

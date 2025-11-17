@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-const BASE_URL = "https://mobile-login-be.onrender.com"; // 👈 đổi theo domain backend của bạn
+const BASE_URL = "https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev"; // 👈 đổi theo domain backend của bạn
 
 export async function defaultFetcher({ queryKey }) {
   const [path] = queryKey;

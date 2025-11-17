@@ -61,23 +61,23 @@ export function CustomerReport() {
   const [debtTo, setDebtTo] = useState("");
 
   const { data: orders } = useQuery({
-    queryKey: ["https://mobile-login-be.onrender.com/api/orders"],
+    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders"],
   });
 
   const { data: products } = useQuery({
-    queryKey: ["https://mobile-login-be.onrender.com/api/products"],
+    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/products"],
   });
 
   const { data: categories } = useQuery({
-    queryKey: ["https://mobile-login-be.onrender.com/api/categories"],
+    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/categories"],
   });
 
   const { data: customers } = useQuery({
-    queryKey: ["https://mobile-login-be.onrender.com/api/customers"],
+    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/customers"],
   });
 
   const { data: customerDebts } = useQuery({
-    queryKey: ["https://mobile-login-be.onrender.com/api/customer-debts"],
+    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/customer-debts"],
     enabled: concernType === "debt",
   });
 
