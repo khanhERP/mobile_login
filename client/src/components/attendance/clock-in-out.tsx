@@ -47,22 +47,22 @@ export function ClockInOut() {
   const { t } = useTranslation();
 
   const { data: employees } = useQuery({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/employees"],
+    queryKey: ["https://api-pos-mobile.edpos.vn/api/employees"],
   });
 
   const { data: todayAttendance, refetch: refetchTodayAttendance } = useQuery({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance/today", selectedEmployeeId],
+    queryKey: ["https://api-pos-mobile.edpos.vn/api/attendance/today", selectedEmployeeId],
     enabled: !!selectedEmployeeId,
   });
 
   const clockInMutation = useMutation({
     mutationFn: () =>
-      apiRequest("POST", "https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance/clock-in", {
+      apiRequest("POST", "https://api-pos-mobile.edpos.vn/api/attendance/clock-in", {
         employeeId: selectedEmployeeId,
         notes,
       }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance"] });
+      queryClient.invalidateQueries({ queryKey: ["https://api-pos-mobile.edpos.vn/api/attendance"] });
       refetchTodayAttendance();
       setNotes("");
       toast({
@@ -83,11 +83,11 @@ export function ClockInOut() {
     mutationFn: () =>
       apiRequest(
         "POST",
-        `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance/clock-out/${(todayAttendance as AttendanceRecord)?.id}`,
+        `https://api-pos-mobile.edpos.vn/api/attendance/clock-out/${(todayAttendance as AttendanceRecord)?.id}`,
         {},
       ),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance"] });
+      queryClient.invalidateQueries({ queryKey: ["https://api-pos-mobile.edpos.vn/api/attendance"] });
       refetchTodayAttendance();
       toast({
         title: t("common.success"),
@@ -107,11 +107,11 @@ export function ClockInOut() {
     mutationFn: () =>
       apiRequest(
         "POST",
-        `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance/break-start/${(todayAttendance as AttendanceRecord)?.id}`,
+        `https://api-pos-mobile.edpos.vn/api/attendance/break-start/${(todayAttendance as AttendanceRecord)?.id}`,
         {},
       ),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance"] });
+      queryClient.invalidateQueries({ queryKey: ["https://api-pos-mobile.edpos.vn/api/attendance"] });
       refetchTodayAttendance();
       toast({
         title: t("common.success"),
@@ -131,11 +131,11 @@ export function ClockInOut() {
     mutationFn: () =>
       apiRequest(
         "POST",
-        `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance/break-end/${(todayAttendance as AttendanceRecord)?.id}`,
+        `https://api-pos-mobile.edpos.vn/api/attendance/break-end/${(todayAttendance as AttendanceRecord)?.id}`,
         {},
       ),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance"] });
+      queryClient.invalidateQueries({ queryKey: ["https://api-pos-mobile.edpos.vn/api/attendance"] });
       refetchTodayAttendance();
       toast({
         title: t("common.success"),

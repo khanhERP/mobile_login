@@ -112,9 +112,9 @@ export function DashboardOverview() {
 
   // Fetch store settings
   const { data: storeSettings } = useQuery<StoreSettings>({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/store-settings"],
+    queryKey: ["https://api-pos-mobile.edpos.vn/api/store-settings"],
     queryFn: async () => {
-      const response = await fetch("https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/store-settings");
+      const response = await fetch("https://api-pos-mobile.edpos.vn/api/store-settings");
       if (!response.ok) {
         throw new Error("Failed to fetch store settings");
       }
@@ -126,7 +126,7 @@ export function DashboardOverview() {
   const { data: ordersData, isLoading: ordersLoading } = useQuery({
     queryKey: ["orders"],
     queryFn: async () => {
-      const response = await fetch("https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders");
+      const response = await fetch("https://api-pos-mobile.edpos.vn/api/orders");
       if (!response.ok) {
         throw new Error("Failed to fetch orders");
       }
@@ -138,7 +138,7 @@ export function DashboardOverview() {
   const { data: orderItemsData, isLoading: orderItemsLoading } = useQuery({
     queryKey: ["order-items"],
     queryFn: async () => {
-      const response = await fetch("https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/order-items");
+      const response = await fetch("https://api-pos-mobile.edpos.vn/api/order-items");
       if (!response.ok) {
         throw new Error("Failed to fetch order items");
       }
@@ -148,17 +148,17 @@ export function DashboardOverview() {
 
   // Fetch orders in date range
   const { data: dateRangeOrders } = useQuery({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders/date-range", dateRange.start, dateRange.end],
+    queryKey: ["https://api-pos-mobile.edpos.vn/api/orders/date-range", dateRange.start, dateRange.end],
     queryFn: async () => {
       try {
         console.log(`Dashboard - Date Range Query:`, {
           startDate: dateRange.start,
           endDate: dateRange.end,
-          apiUrl: `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders/date-range/${dateRange.start}/${dateRange.end}`,
+          apiUrl: `https://api-pos-mobile.edpos.vn/api/orders/date-range/${dateRange.start}/${dateRange.end}`,
         });
 
         const response = await fetch(
-          `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders/date-range/${dateRange.start}/${dateRange.end}`,
+          `https://api-pos-mobile.edpos.vn/api/orders/date-range/${dateRange.start}/${dateRange.end}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -192,7 +192,7 @@ export function DashboardOverview() {
   const { data: tablesData } = useQuery({
     queryKey: ["tables"],
     queryFn: async () => {
-      const response = await fetch("https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/tables");
+      const response = await fetch("https://api-pos-mobile.edpos.vn/api/tables");
       if (!response.ok) {
         throw new Error("Failed to fetch tables");
       }

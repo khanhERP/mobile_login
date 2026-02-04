@@ -30,15 +30,15 @@ export function AttendanceList({
 }: AttendanceListProps) {
   const { t } = useTranslation();
   const { data: employees } = useQuery({
-    queryKey: ['https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/employees'],
+    queryKey: ['https://api-pos-mobile.edpos.vn/api/employees'],
   });
 
   const { data: attendanceRecords, isLoading } = useQuery({
     queryKey: useRange 
-      ? ['https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance', 'range', dateRange?.startDate, dateRange?.endDate]
-      : ['https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance', selectedDate],
+      ? ['https://api-pos-mobile.edpos.vn/api/attendance', 'range', dateRange?.startDate, dateRange?.endDate]
+      : ['https://api-pos-mobile.edpos.vn/api/attendance', selectedDate],
     queryFn: async () => {
-      let url = 'https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/attendance';
+      let url = 'https://api-pos-mobile.edpos.vn/api/attendance';
       if (useRange && dateRange?.startDate && dateRange?.endDate) {
         url += `?startDate=${dateRange.startDate}&endDate=${dateRange.endDate}`;
       } else {

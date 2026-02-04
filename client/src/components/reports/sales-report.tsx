@@ -54,11 +54,11 @@ export function SalesReport() {
     error: ordersError,
     refetch: refetchOrders,
   } = useQuery({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders/date-range", startDate, endDate],
+    queryKey: ["https://api-pos-mobile.edpos.vn/api/orders/date-range", startDate, endDate],
     queryFn: async () => {
       try {
         const response = await fetch(
-          `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders/date-range/${startDate}/${endDate}`,
+          `https://api-pos-mobile.edpos.vn/api/orders/date-range/${startDate}/${endDate}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -80,11 +80,11 @@ export function SalesReport() {
     isLoading: orderItemsLoading,
     refetch: refetchOrderItems,
   } = useQuery({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/order-items/date-range", startDate, endDate],
+    queryKey: ["https://api-pos-mobile.edpos.vn/api/order-items/date-range", startDate, endDate],
     queryFn: async () => {
       try {
         const response = await fetch(
-          `https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/order-items/${startDate}/${endDate}`,
+          `https://api-pos-mobile.edpos.vn/api/order-items/${startDate}/${endDate}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

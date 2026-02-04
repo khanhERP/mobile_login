@@ -57,23 +57,23 @@ export function InventoryReport() {
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const { data: products } = useQuery({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/products"],
+    queryKey: ["https://api-pos-mobile.edpos.vn/api/products"],
   });
 
   const { data: categories } = useQuery({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/categories"],
+    queryKey: ["https://api-pos-mobile.edpos.vn/api/categories"],
   });
 
   const { data: orders } = useQuery({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/orders"],
+    queryKey: ["https://api-pos-mobile.edpos.vn/api/orders"],
   });
 
   const { data: employees } = useQuery({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/employees"],
+    queryKey: ["https://api-pos-mobile.edpos.vn/api/employees"],
   });
 
   const { data: suppliers } = useQuery({
-    queryKey: ["https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/suppliers"],
+    queryKey: ["https://api-pos-mobile.edpos.vn/api/suppliers"],
   });
 
   const formatCurrency = (amount: number) => {
@@ -1489,8 +1489,8 @@ export function InventoryReport() {
 const fetchInventoryData = async () => {
     try {
       const [productsResponse, categoriesResponse] = await Promise.all([
-        fetch('https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/products'),
-        fetch('https://4beac38c-34b4-47be-8df2-4a7d6f34c6b5-00-yd16h0ayqss7.pike.replit.dev/api/categories')
+        fetch('https://api-pos-mobile.edpos.vn/api/products'),
+        fetch('https://api-pos-mobile.edpos.vn/api/categories')
       ]);
 
       if (!productsResponse.ok || !categoriesResponse.ok) {
