@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-const BASE_URL = "https://api-pos-mobile.edpos.vn"; // 👈 đổi theo domain backend của bạn
+const BASE_URL = "https://api-pos-login.edpos.vn"; // 👈 đổi theo domain backend của bạn
 
 export async function defaultFetcher({ queryKey }) {
   const [path] = queryKey;

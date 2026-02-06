@@ -63,10 +63,10 @@ export function OrderReport() {
 
   // Query orders by date range
   const { data: orders = [] } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/orders/date-range", startDate, endDate],
+    queryKey: ["https://api-pos-login.edpos.vn/api/orders/date-range", startDate, endDate],
     queryFn: async () => {
       try {
-        const response = await fetch(`https://api-pos-mobile.edpos.vn/api/orders/date-range/${startDate}/${endDate}`);
+        const response = await fetch(`https://api-pos-login.edpos.vn/api/orders/date-range/${startDate}/${endDate}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -81,10 +81,10 @@ export function OrderReport() {
 
   // Query transactions by date range
   const { data: transactions = [] } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/transactions", startDate, endDate],
+    queryKey: ["https://api-pos-login.edpos.vn/api/transactions", startDate, endDate],
     queryFn: async () => {
       try {
-        const response = await fetch(`https://api-pos-mobile.edpos.vn/api/transactions/${startDate}/${endDate}`);
+        const response = await fetch(`https://api-pos-login.edpos.vn/api/transactions/${startDate}/${endDate}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -98,15 +98,15 @@ export function OrderReport() {
   });
 
   const { data: products = [] } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/products"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/products"],
   });
 
   const { data: categories = [] } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/categories"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/categories"],
   });
 
   const { data: employees = [] } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/employees"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/employees"],
   });
 
   const getFilteredData = () => {

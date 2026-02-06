@@ -61,23 +61,23 @@ export function CustomerReport() {
   const [debtTo, setDebtTo] = useState("");
 
   const { data: orders } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/orders"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/orders"],
   });
 
   const { data: products } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/products"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/products"],
   });
 
   const { data: categories } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/categories"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/categories"],
   });
 
   const { data: customers } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/customers"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/customers"],
   });
 
   const { data: customerDebts } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/customer-debts"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/customer-debts"],
     enabled: concernType === "debt",
   });
 

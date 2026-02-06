@@ -44,16 +44,16 @@ export function SupplierReport() {
   const [debtTo, setDebtTo] = useState<string>("");
 
   const { data: suppliers } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/suppliers"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/suppliers"],
   });
 
   const { data: supplierDebts } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/supplier-debts"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/supplier-debts"],
     enabled: concernType === "debt",
   });
 
   const { data: supplierPurchases } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/supplier-purchases"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/supplier-purchases"],
     enabled: concernType === "purchase" || concernType === "purchaseBySupplier",
   });
 

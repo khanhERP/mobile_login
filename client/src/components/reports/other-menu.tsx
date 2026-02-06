@@ -114,7 +114,7 @@ export function OtherMenu({ onBack, onLogout }: OtherMenuProps) {
       const storedUser = sessionStorage.getItem('currentUser');
       const username = storedUser ? JSON.parse(storedUser).userName : undefined;
 
-      const response = await fetch('https://api-pos-mobile.edpos.vn/api/auth/change-password', {
+      const response = await fetch('https://api-pos-login.edpos.vn/api/auth/change-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

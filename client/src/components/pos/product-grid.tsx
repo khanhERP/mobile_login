@@ -38,9 +38,9 @@ export function ProductGrid({ selectedCategory, searchQuery, onAddToCart }: Prod
 
   // Fetch store settings to check price inclusion of tax
   const { data: storeSettings } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/store-settings"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/store-settings"],
     queryFn: async () => {
-      const response = await fetch("https://api-pos-mobile.edpos.vn/api/store-settings");
+      const response = await fetch("https://api-pos-login.edpos.vn/api/store-settings");
       if (!response.ok) throw new Error('Failed to fetch store settings');
       return response.json();
     },
@@ -56,14 +56,14 @@ export function ProductGrid({ selectedCategory, searchQuery, onAddToCart }: Prod
   };
 
   const { data: products = [], isLoading } = useQuery<Product[]>({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/products", { category: selectedCategory, search: searchQuery }],
+    queryKey: ["https://api-pos-login.edpos.vn/api/products", { category: selectedCategory, search: searchQuery }],
     queryFn: async () => {
       const params = new URLSearchParams();
       if (searchQuery) {
         params.append("search", searchQuery);
       }
 
-      const response = await fetch(`https://api-pos-mobile.edpos.vn/api/products?${params}`);
+      const response = await fetch(`https://api-pos-login.edpos.vn/api/products?${params}`);
       if (!response.ok) throw new Error('Failed to fetch products');
       const allProducts = await response.json();
 

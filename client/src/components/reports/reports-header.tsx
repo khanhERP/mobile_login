@@ -19,9 +19,9 @@ export function ReportsHeader({
 
   // Fetch store settings
   const { data: storeSettings } = useQuery<StoreSettings>({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/store-settings"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/store-settings"],
     queryFn: async () => {
-      const response = await fetch("https://api-pos-mobile.edpos.vn/api/store-settings");
+      const response = await fetch("https://api-pos-login.edpos.vn/api/store-settings");
       if (!response.ok) {
         throw new Error("Failed to fetch store settings");
       }

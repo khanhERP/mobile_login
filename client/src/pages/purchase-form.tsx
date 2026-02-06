@@ -206,13 +206,13 @@ export default function PurchaseFormPage({
 
   // Fetch suppliers
   const { data: suppliers = [] } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/suppliers"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/suppliers"],
     select: (data: any) => data || [],
   });
 
   // Fetch employees for assignment
   const { data: employees = [] } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/employees"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/employees"],
     select: (data: any[]) =>
       (data || []).map((emp: any) => ({
         id: emp.id,
@@ -222,13 +222,13 @@ export default function PurchaseFormPage({
 
   // Fetch categories for new product form
   const { data: categories = [] } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/categories"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/categories"],
     select: (data: any) => data || [],
   });
 
   // Fetch products for selection
   const { data: allProducts = [] } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/products"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/products"],
     select: (data: any[]) =>
       (data || []).map((product: any) => ({
         ...product,
@@ -248,7 +248,7 @@ export default function PurchaseFormPage({
 
   // Fetch existing purchase order for edit mode
   const { data: existingOrder, isLoading: isLoadingOrder } = useQuery({
-    queryKey: [`https://api-pos-mobile.edpos.vn/api/purchase-orders/${id}`],
+    queryKey: [`https://api-pos-login.edpos.vn/api/purchase-orders/${id}`],
     enabled: Boolean(id),
     select: (data: any) => {
       console.log("📊 Purchase order API response:", data);
@@ -258,7 +258,7 @@ export default function PurchaseFormPage({
 
   // Fetch existing documents for edit mode
   const { data: existingDocuments } = useQuery({
-    queryKey: [`https://api-pos-mobile.edpos.vn/api/purchase-orders/${id}/documents`],
+    queryKey: [`https://api-pos-login.edpos.vn/api/purchase-orders/${id}/documents`],
     enabled: Boolean(id),
     select: (data: any) => data || [],
   });
@@ -269,14 +269,14 @@ export default function PurchaseFormPage({
     error: nextPOError,
     isLoading: isLoadingPONumber,
   } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/purchase-orders/next-po-number"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/purchase-orders/next-po-number"],
     enabled: !isEditMode,
     queryFn: async () => {
       try {
         console.log("🔍 Fetching next PO number...");
         const response = await apiRequest(
           "GET",
-          "https://api-pos-mobile.edpos.vn/api/purchase-orders/next-po-number",
+          "https://api-pos-login.edpos.vn/api/purchase-orders/next-po-number",
         );
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -466,8 +466,8 @@ export default function PurchaseFormPage({
       console.log("API payload:", data);
 
       const response = isEditMode
-        ? await apiRequest("PUT", `https://api-pos-mobile.edpos.vn/api/purchase-receipts/${id}`, data)
-        : await apiRequest("POST", "https://api-pos-mobile.edpos.vn/api/purchase-receipts", data);
+        ? await apiRequest("PUT", `https://api-pos-login.edpos.vn/api/purchase-receipts/${id}`, data)
+        : await apiRequest("POST", "https://api-pos-login.edpos.vn/api/purchase-receipts", data);
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -492,8 +492,8 @@ export default function PurchaseFormPage({
       });
 
       // Refresh data
-      queryClient.invalidateQueries({ queryKey: ["https://api-pos-mobile.edpos.vn/api/purchase-orders"] });
-      queryClient.invalidateQueries({ queryKey: ["https://api-pos-mobile.edpos.vn/api/suppliers"] });
+      queryClient.invalidateQueries({ queryKey: ["https://api-pos-login.edpos.vn/api/purchase-orders"] });
+      queryClient.invalidateQueries({ queryKey: ["https://api-pos-login.edpos.vn/api/suppliers"] });
 
       // Navigate back to purchases list
       setTimeout(() => {
@@ -531,7 +531,7 @@ export default function PurchaseFormPage({
   // Create new product mutation
   const createProductMutation = useMutation({
     mutationFn: async (data: any) => {
-      const response = await apiRequest("POST", "https://api-pos-mobile.edpos.vn/api/products", data);
+      const response = await apiRequest("POST", "https://api-pos-login.edpos.vn/api/products", data);
       return response.json();
     },
     onSuccess: (newProduct) => {
@@ -542,7 +542,7 @@ export default function PurchaseFormPage({
       });
 
       // Update products query cache
-      queryClient.setQueryData(["https://api-pos-mobile.edpos.vn/api/products"], (old: any[]) => {
+      queryClient.setQueryData(["https://api-pos-login.edpos.vn/api/products"], (old: any[]) => {
         return [
           ...(old || []),
           { ...newProduct, unitPrice: Number(newProduct.price) || 0 },
@@ -550,7 +550,7 @@ export default function PurchaseFormPage({
       });
 
       // Invalidate queries for cache consistency
-      queryClient.invalidateQueries({ queryKey: ["https://api-pos-mobile.edpos.vn/api/products"] });
+      queryClient.invalidateQueries({ queryKey: ["https://api-pos-login.edpos.vn/api/products"] });
 
       // Add new product to selected items automatically
       addProduct({

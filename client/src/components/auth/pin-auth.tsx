@@ -53,7 +53,7 @@ export function PinAuth({ onAuthSuccess }: PinAuthProps) {
       console.log("🔐 Logging in via API...");
 
       // Call API to verify PIN - Changed to login API
-      const response = await fetch("https://api-pos-mobile.edpos.vn/api/auth/login", {
+      const response = await fetch("https://api-pos-login.edpos.vn/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

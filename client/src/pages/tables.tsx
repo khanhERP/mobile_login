@@ -27,7 +27,7 @@ export default function TablesPage({ onLogout }: TablesPageProps) {
     const connectWebSocket = () => {
       try {
         const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-        const wsUrl = `https://api-pos-mobile.edpos.vn/ws`;
+        const wsUrl = `https://api-pos-login.edpos.vn/ws`;
         ws = new WebSocket(wsUrl);
 
         ws.onopen = () => {
@@ -60,8 +60,8 @@ export default function TablesPage({ onLogout }: TablesPageProps) {
 
               // Clear cache and force refresh
               queryClient.clear();
-              queryClient.invalidateQueries({ queryKey: ["https://api-pos-mobile.edpos.vn/api/tables"] });
-              queryClient.invalidateQueries({ queryKey: ["https://api-pos-mobile.edpos.vn/api/orders"] });
+              queryClient.invalidateQueries({ queryKey: ["https://api-pos-login.edpos.vn/api/tables"] });
+              queryClient.invalidateQueries({ queryKey: ["https://api-pos-login.edpos.vn/api/orders"] });
 
               // Dispatch custom events for TableGrid component
               window.dispatchEvent(
@@ -108,8 +108,8 @@ export default function TablesPage({ onLogout }: TablesPageProps) {
 
       // Force data refresh for any e-invoice related events
       queryClient.clear();
-      queryClient.invalidateQueries({ queryKey: ["https://api-pos-mobile.edpos.vn/api/tables"] });
-      queryClient.invalidateQueries({ queryKey: ["https://api-pos-mobile.edpos.vn/api/orders"] });
+      queryClient.invalidateQueries({ queryKey: ["https://api-pos-login.edpos.vn/api/tables"] });
+      queryClient.invalidateQueries({ queryKey: ["https://api-pos-login.edpos.vn/api/orders"] });
 
       // Dispatch refresh event for TableGrid
       window.dispatchEvent(

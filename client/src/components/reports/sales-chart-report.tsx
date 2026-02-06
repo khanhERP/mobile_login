@@ -105,9 +105,9 @@ export function SalesChartReport() {
 
   // Query store settings for priceIncludesTax
   const { data: storeSettings } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/store-settings"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/store-settings"],
     queryFn: async () => {
-      const response = await fetch("https://api-pos-mobile.edpos.vn/api/store-settings");
+      const response = await fetch("https://api-pos-login.edpos.vn/api/store-settings");
       if (!response.ok) {
         throw new Error("Failed to fetch store settings");
       }
@@ -123,7 +123,7 @@ export function SalesChartReport() {
     error: ordersError,
   } = useQuery({
     queryKey: [
-      "https://api-pos-mobile.edpos.vn/api/orders/date-range",
+      "https://api-pos-login.edpos.vn/api/orders/date-range",
       startDate,
       endDate,
       startTime,
@@ -168,7 +168,7 @@ export function SalesChartReport() {
         });
 
         const response = await fetch(
-          `https://api-pos-mobile.edpos.vn/api/orders/date-range/${encodeURIComponent(startDateTimeISO)}/${encodeURIComponent(endDateTimeISO)}`,
+          `https://api-pos-login.edpos.vn/api/orders/date-range/${encodeURIComponent(startDateTimeISO)}/${encodeURIComponent(endDateTimeISO)}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -202,10 +202,10 @@ export function SalesChartReport() {
 
   // Query order items for all orders
   const { data: orderItems = [], isLoading: orderItemsLoading } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/order-items"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/order-items"],
     queryFn: async () => {
       try {
-        const response = await fetch("https://api-pos-mobile.edpos.vn/api/order-items");
+        const response = await fetch("https://api-pos-login.edpos.vn/api/order-items");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -226,22 +226,22 @@ export function SalesChartReport() {
   });
 
   const { data: tables } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/tables"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/tables"],
   });
 
   // Combined loading state
   const isLoading = ordersLoading || orderItemsLoading;
 
   const { data: employees } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/employees"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/employees"],
     staleTime: 5 * 60 * 1000,
   });
 
   const { data: products } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/products", selectedCategory, productType, productSearch],
+    queryKey: ["https://api-pos-login.edpos.vn/api/products", selectedCategory, productType, productSearch],
     queryFn: async () => {
       const response = await fetch(
-        `https://api-pos-mobile.edpos.vn/api/products/${selectedCategory}/${productType}/${productSearch || ""}`,
+        `https://api-pos-login.edpos.vn/api/products/${selectedCategory}/${productType}/${productSearch || ""}`,
       );
       if (!response.ok) throw new Error("Failed to fetch products");
       return response.json();
@@ -250,15 +250,15 @@ export function SalesChartReport() {
   });
 
   const { data: categories } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/categories"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/categories"],
     staleTime: 5 * 60 * 1000,
   });
 
   const { data: customers } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/customers", customerSearch, customerStatus],
+    queryKey: ["https://api-pos-login.edpos.vn/api/customers", customerSearch, customerStatus],
     queryFn: async () => {
       const response = await fetch(
-        `https://api-pos-mobile.edpos.vn/api/customers/${customerSearch || "all"}/${customerStatus}`,
+        `https://api-pos-login.edpos.vn/api/customers/${customerSearch || "all"}/${customerStatus}`,
       );
       if (!response.ok) throw new Error("Failed to fetch customers");
       return response.json();
@@ -270,7 +270,7 @@ export function SalesChartReport() {
   const { data: productAnalysisData, isLoading: productAnalysisLoading } =
     useQuery({
       queryKey: [
-        "https://api-pos-mobile.edpos.vn/api/product-analysis",
+        "https://api-pos-login.edpos.vn/api/product-analysis",
         startDate, // Use startDate for consistency
         endDate, // Use endDate for consistency
         selectedCategory,
@@ -285,7 +285,7 @@ export function SalesChartReport() {
           productType,
           productSearch: productSearch || "",
         });
-        const response = await fetch(`https://api-pos-mobile.edpos.vn/api/product-analysis?${params}`);
+        const response = await fetch(`https://api-pos-login.edpos.vn/api/product-analysis?${params}`);
         if (!response.ok) throw new Error("Failed to fetch product analysis");
         return response.json();
       },
@@ -294,7 +294,7 @@ export function SalesChartReport() {
     });
 
   const { data: transactions } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/transactions"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/transactions"],
     staleTime: 5 * 60 * 1000,
   });
 

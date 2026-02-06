@@ -57,23 +57,23 @@ export function InventoryReport() {
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const { data: products } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/products"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/products"],
   });
 
   const { data: categories } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/categories"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/categories"],
   });
 
   const { data: orders } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/orders"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/orders"],
   });
 
   const { data: employees } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/employees"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/employees"],
   });
 
   const { data: suppliers } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/suppliers"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/suppliers"],
   });
 
   const formatCurrency = (amount: number) => {
@@ -1489,8 +1489,8 @@ export function InventoryReport() {
 const fetchInventoryData = async () => {
     try {
       const [productsResponse, categoriesResponse] = await Promise.all([
-        fetch('https://api-pos-mobile.edpos.vn/api/products'),
-        fetch('https://api-pos-mobile.edpos.vn/api/categories')
+        fetch('https://api-pos-login.edpos.vn/api/products'),
+        fetch('https://api-pos-login.edpos.vn/api/categories')
       ]);
 
       if (!productsResponse.ok || !categoriesResponse.ok) {

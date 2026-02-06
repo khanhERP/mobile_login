@@ -59,28 +59,28 @@ export function EmployeeReport() {
   const [salesChannel, setSalesChannel] = useState("all");
 
   const { data: employees } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/employees"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/employees"],
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
 
   const { data: transactions } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/transactions", startDate, endDate],
+    queryKey: ["https://api-pos-login.edpos.vn/api/transactions", startDate, endDate],
     staleTime: 1 * 60 * 1000, // 1 minute
   });
 
   const { data: products } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/products"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/products"],
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
 
   const { data: categories } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/categories"],
+    queryKey: ["https://api-pos-login.edpos.vn/api/categories"],
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
 
   // Employee sales data query
   const { data: employeeSalesData } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/employee-sales", startDate, endDate, selectedEmployee],
+    queryKey: ["https://api-pos-login.edpos.vn/api/employee-sales", startDate, endDate, selectedEmployee],
     staleTime: 1 * 60 * 1000, // 1 minute
   });
 

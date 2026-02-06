@@ -54,11 +54,11 @@ export function SalesReport() {
     error: ordersError,
     refetch: refetchOrders,
   } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/orders/date-range", startDate, endDate],
+    queryKey: ["https://api-pos-login.edpos.vn/api/orders/date-range", startDate, endDate],
     queryFn: async () => {
       try {
         const response = await fetch(
-          `https://api-pos-mobile.edpos.vn/api/orders/date-range/${startDate}/${endDate}`,
+          `https://api-pos-login.edpos.vn/api/orders/date-range/${startDate}/${endDate}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -80,11 +80,11 @@ export function SalesReport() {
     isLoading: orderItemsLoading,
     refetch: refetchOrderItems,
   } = useQuery({
-    queryKey: ["https://api-pos-mobile.edpos.vn/api/order-items/date-range", startDate, endDate],
+    queryKey: ["https://api-pos-login.edpos.vn/api/order-items/date-range", startDate, endDate],
     queryFn: async () => {
       try {
         const response = await fetch(
-          `https://api-pos-mobile.edpos.vn/api/order-items/${startDate}/${endDate}`,
+          `https://api-pos-login.edpos.vn/api/order-items/${startDate}/${endDate}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
